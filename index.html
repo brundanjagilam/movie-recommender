@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Movie Recommender</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            border-radius: 15px;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* center horizontally */
+            gap: 10px; /* spacing between elements */
+        }
+        select, input[type="submit"] {
+            width: 60%;
+            max-width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #ff6347;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #e5533d;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Movie Recommender</h1>
+        <form method="POST" action="/recommend">
+            <label for="movie">Choose a movie:</label><br />
+            <select name="movie" id="movie">
+                {% for title in movie_titles %}
+                    <option value="{{ title }}">{{ title }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Recommend" />
+        </form>
+
+        {% if recommendations %}
+            <h2>Recommended Movies:</h2>
+            <ul>
+                {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
+
